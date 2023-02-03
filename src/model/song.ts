@@ -5,7 +5,7 @@ import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 export class Song {
     @PrimaryGeneratedColumn()
     idSong: number;
-    @Column({type: "varchar", length: 255})
+    @Column()
     nameSong: string;
     @Column()
     singer: string

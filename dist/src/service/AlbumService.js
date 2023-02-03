@@ -23,6 +23,14 @@ class AlbumService {
             }
             return this.albumRepository.delete({ idAlbum: idAlbum });
         };
+        this.checkUser = async (idUser, idAlbum) => {
+            let sql = `select u.idUser from album a join user u on a.idUser = u.idUser where idAlbum = ${idAlbum}`;
+            let checkIdUser = await this.albumRepository.query(sql);
+            if (checkIdUser[0].idUser === idUser) {
+                return true;
+            }
+            return false;
+        };
         this.albumRepository = data_source_1.AppDataSource.getRepository(album_1.Album);
     }
 }

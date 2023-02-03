@@ -6,7 +6,7 @@ declare class SongController {
     getAllSong: (req: Request, res: Response) => Promise<void>;
     createSong: (req: Request, res: Response) => Promise<void>;
     editSong: (req: Request, res: Response) => Promise<void>;
-    moveSong: (req: Request, res: Response) => Promise<void>;
+    removeSong: (req: Request, res: Response) => Promise<void>;
     findByIdSong: (req: Request, res: Response) => Promise<void>;
     findCategory: (req: Request, res: Response) => Promise<void>;
     searchNameSong: (req: Request, res: Response) => Promise<void>;
