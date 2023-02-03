@@ -66,7 +66,7 @@ class SongController {
     }
     findByIdSong = async (req: Request, res: Response) => {
         try {
-            let idSong = req.params.id
+            let idSong = req.params.idSong
             let songs = await songService.findById(idSong);
             res.status(200).json(songs)
         } catch (e) {
@@ -96,6 +96,15 @@ class SongController {
         try {
             let songs = await this.songService.findSongByIdUser(req.params.idUser)
             return res.status(200).json(songs)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
+    countSong = async (req: Request,res: Response)=> {
+        try {
+            let idSong = req.params.idSong
+            let counts = await this.songService.checkCount(idSong)
+            res.status(200).json(counts)
         } catch (err) {
             res.status(500).json(err.message)
         }

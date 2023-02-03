@@ -5,8 +5,8 @@ import {userAuth} from "../middleware/user";
 export const albumRouter = Router()
 albumRouter.get('',albumController.getAll)
 albumRouter.use(auth)
-albumRouter.post('/', userAuth,albumController.createAlbum)
-albumRouter.put('/:id', userAuth,albumController.editAlbum)
-albumRouter.delete('/:id',albumController.removeAlbum)
-albumRouter.get('/:id',albumController.findByIdAlbum)
+albumRouter.post('/', userAuth,albumController.createAlbum);
+albumRouter.put('/:id', userAuth,albumController.editAlbum);
+albumRouter.delete('/:id',albumController.removeAlbum);
+albumRouter.get('/:id',albumController.findByIdAlbum);
 // albumRouter.get('/', userAuth,albumController.showMyAlbum)

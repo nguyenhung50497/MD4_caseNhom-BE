@@ -8,9 +8,9 @@ import {userAuth} from "../middleware/user";
 
 
 export const playlistRouter = Router();
-playlistRouter.get('',playlistController.getAll);
 playlistRouter.use(auth);
+playlistRouter.get('',playlistController.getAll);
 playlistRouter.post('/', userAuth,playlistController.createPlaylist);
 playlistRouter.put('/:idPlaylist', userAuth,playlistController.editPlaylist);
-playlistRouter.get('/:idPlaylist',playlistController.findByIdPlaylist);
+// playlistRouter.get('/:idPlaylist',playlistController.findByIdPlaylist);
 playlistRouter.get('/my-playlist/:idUser',playlistController.showPlaylistByIdUser)
