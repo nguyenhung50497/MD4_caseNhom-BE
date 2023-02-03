@@ -23,6 +23,23 @@ class AlbumController{
         }
 
     }
+    editAlbum = async (req: Request, res: Response)=> {
+      try {
+          let idAlbum = req.params.id;
+          let newAlbum = req.body
+          let idUser = req["decoded"].idUser;
+          let check = await this.albumService.checkUser(idUser, idAlbum);
+          if(check) {
+              let albums = await this.albumService.updateAlbum(idAlbum,newAlbum);
+              res.status(200).json(albums)
+          }
+          else {
+              res.status(401).json('invalid');
+          }
+      } catch (e) {
+          res.status(500).json(e.message)
+      }
+}
     removeAlbum = async (req: Request, res: Response) => {
         try {
             let idAlbum = req.params.id;

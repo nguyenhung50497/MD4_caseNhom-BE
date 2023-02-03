@@ -92,7 +92,14 @@ class SongController {
 
     }
 
-
+    findSongByIdUser = async (req: Request,res: Response) =>{
+        try {
+            let songs = await this.songService.findSongByIdUser(req.params.idUser)
+            return res.status(200).json(songs)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
 }
 
 export default new SongController();

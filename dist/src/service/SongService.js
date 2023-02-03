@@ -5,7 +5,10 @@ const song_1 = require("../model/song");
 class SongService {
     constructor() {
         this.getAll = async () => {
-            let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory`;
+            let sql = `select *
+                   from album
+                            join song s on album.idAlbum = s.idAlbum
+                            join category c on s.idCategory = c.idCategory`;
             let songs = await this.songRepository.query(sql);
             return songs;
         };
@@ -32,8 +35,21 @@ class SongService {
         };
         this.findByNameSong = async (value) => {
         };
+        this.findSongByIdUser = async (id) => {
+            let sql = `select *
+                   from song
+                            join album a on song.idAlbum = a.idAlbum
+                            join user u on a.idUser = u.idUser
+                   where a.idUser = ${id}`;
+            let songs = this.songRepository.query(sql);
+            return songs;
+        };
         this.checkUser = async (idUser, idSong) => {
-            let sql = `select u.idUser from song s join album a on s.idAlbum = a.idAlbum join user u on a.idUser = u.idUser where idSong = ${idSong}`;
+            let sql = `select u.idUser
+                   from song s
+                            join album a on s.idAlbum = a.idAlbum
+                            join user u on a.idUser = u.idUser
+                   where idSong = ${idSong}`;
             let checkIdUser = await this.songRepository.query(sql);
             if (checkIdUser[0].idUser === idUser) {
                 return true;

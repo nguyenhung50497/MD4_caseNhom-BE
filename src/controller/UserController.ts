@@ -40,6 +40,15 @@ class UserController {
             res.status(500).json(e.message)
         }
     }
+    showSongCreate = async (req: Request, res: Response)=> {
+        try {
+        let id = req.params.idUser;
+        let user = await this.userServices.showSong(id);
+        res.status(200).json(user)
+    } catch (e) {
+        res.status(500).json(e.message)
+    }
+    }
 }
 
 
