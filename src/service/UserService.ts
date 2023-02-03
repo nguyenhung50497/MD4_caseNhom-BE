@@ -3,12 +3,17 @@ import {AppDataSource} from "../data-source";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {SECRET} from "../middleware/auth";
+import SongService from "./SongService";
+import {Song} from "../model/song";
 
 class UserServices {
     private userRepository;
+    private songRepository
 
     constructor() {
         this.userRepository = AppDataSource.getRepository(User)
+        this.songRepository = AppDataSource.getRepository(Song)
+
     }
 
     getAll = async () => {
@@ -39,7 +44,7 @@ class UserServices {
                     role: userCheck.role
                 }
 
-                const token = await  jwt.sign(payload, SECRET, {
+                const token = jwt.sign(payload, SECRET, {
                     expiresIn: 360000
                 });
 
@@ -70,6 +75,17 @@ class UserServices {
             return null;
         }
         return this.userRepository.delete({idUser: id})
+    }
+
+    showSong = async (id)=>{
+        let user = await this.userRepository.findOneBy({idUser: id});
+        if(!user) {
+            return null;
+        }
+        else {
+
+        }
+
     }
 }
 

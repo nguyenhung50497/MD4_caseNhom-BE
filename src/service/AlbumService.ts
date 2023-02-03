@@ -20,13 +20,13 @@ class AlbumService {
         let albums = await this.albumRepository.findOneBy({idAlbum :idAlbum})
         return albums
     }
-    // update = async (idAlbum,newAlbum) => {
-    //     let albums = await this.albumRepository.findOneBy({idAlbum: idAlbum})
-    //     if (!albums) {
-    //         return null
-    //     }
-    //     return await this.albumRepository.update({idAlbum: idAlbum}, newAlbum)
-    // }
+    updateAlbum = async (idAlbum,newAlbum) => {
+        let albums = await this.albumRepository.findOneBy({idAlbum: idAlbum})
+        if (!albums) {
+            return null
+        }
+        return await this.albumRepository.update({idAlbum: idAlbum}, newAlbum)
+    }
     removeAlbum = async (idAlbum) => {
         let albums = await this.albumRepository.findOneBy({idAlbum : idAlbum});
         if(!albums){
