@@ -27,15 +27,15 @@ class PlaylistController{
         }
 
     }
-    findByIdPlaylist = async (req: Request, res: Response) => {
-        try {
-            let idPlaylist = req.params.idAlbum
-            let playlists = await playlistService.findById(idPlaylist);
-            res.status(200).jsonp(playlists)
-        } catch (e) {
-            res.status(500).json(e.message)
-        }
-    }
+    // findByIdPlaylist = async (req: Request, res: Response) => {
+    //     try {
+    //         let idPlaylist = req.params.idAlbum
+    //         let playlists = await playlistService.findById(idPlaylist);
+    //         res.status(200).jsonp(playlists)
+    //     } catch (e) {
+    //         res.status(500).json(e.message)
+    //     }
+    // }
     editPlaylist = async (req: Request, res: Response)=> {
         try {
             let idPlaylist = req.params.idPlaylist;

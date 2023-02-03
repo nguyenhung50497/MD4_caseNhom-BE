@@ -12,5 +12,5 @@ playlistRouter.get('',playlistController.getAll);
 playlistRouter.use(auth);
 playlistRouter.post('/', userAuth,playlistController.createPlaylist);
 playlistRouter.put('/:idPlaylist', userAuth,playlistController.editPlaylist);
-playlistRouter.get('/:idPlaylist',playlistController.findByIdPlaylist);
+// playlistRouter.get('/:idPlaylist',playlistController.findByIdPlaylist);
 playlistRouter.get('/my-playlist/:idUser',playlistController.showPlaylistByIdUser)

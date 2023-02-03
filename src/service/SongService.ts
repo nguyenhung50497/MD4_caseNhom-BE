@@ -64,6 +64,14 @@ class SongService {
         }
         return false;
     }
+    checkCount = async (idSong)=>{
+        let songs = await this.songRepository.findOneBy({idSong : idSong});
+        if (!songs) {
+            return null;
+        }
+        songs.count ++;
+        return await this.songRepository.update({ idSong: idSong}, songs);
+    }
 
 }
 

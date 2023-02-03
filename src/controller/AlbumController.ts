@@ -58,7 +58,7 @@ class AlbumController{
     }
     findByIdAlbum = async (req: Request, res: Response) => {
         try {
-            let idAlbum = req.params.idAlbum
+            let idAlbum = req.params.id;
             let albums = await albumService.findById(idAlbum);
             res.status(200).json(albums)
         } catch (e) {

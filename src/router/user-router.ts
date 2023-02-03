@@ -1,8 +1,7 @@
 import {Router} from "express";
 
-import UserController from "../controller/Usercontroller";
+import UserController from "../controller/UserController";
 import {userAuth} from "../middleware/user";
-import userController from "../controller/Usercontroller";
 
 export const userRouter = Router();
 userRouter.post('/register',UserController.register)
