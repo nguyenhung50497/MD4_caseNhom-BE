@@ -43,8 +43,17 @@ class AlbumController {
         };
         this.findByIdAlbum = async (req, res) => {
             try {
-                let idAlbum = req.params.idAlbum;
+                let idAlbum = req.params.id;
                 let albums = await AlbumService_1.default.findById(idAlbum);
+                res.status(200).json(albums);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.showMyAlbum = async (req, res) => {
+            try {
+                let albums = await AlbumService_1.default.myAlbum(req["decoded"].idUser);
                 res.status(200).json(albums);
             }
             catch (e) {

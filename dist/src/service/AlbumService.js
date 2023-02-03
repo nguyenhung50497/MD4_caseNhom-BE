@@ -14,6 +14,9 @@ class AlbumService {
         };
         this.findById = async (idAlbum) => {
             let albums = await this.albumRepository.findOneBy({ idAlbum: idAlbum });
+            if (!albums) {
+                return null;
+            }
             return albums;
         };
         this.removeAlbum = async (idAlbum) => {
@@ -30,6 +33,15 @@ class AlbumService {
                 return true;
             }
             return false;
+        };
+        this.myAlbum = async (idUser) => {
+            let sql = `select * from album where idUser = ${idUser}`;
+            let albums = await this.albumRepository.query(sql);
+            console.log(albums);
+            if (!albums) {
+                return null;
+            }
+            return albums;
         };
         this.albumRepository = data_source_1.AppDataSource.getRepository(album_1.Album);
     }
