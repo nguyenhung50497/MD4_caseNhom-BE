@@ -10,6 +10,11 @@ class UserController {
 
     }
 
+    getAllUser = async (req: Request, res: Response) => {
+        let response = await this.userServices.getAll()
+        res.status(200).json(response)
+    }
+
     register = async (req: Request, res: Response) => {
         let user = await this.userServices.register(req.body);
         res.status(201).json(user)
@@ -26,6 +31,15 @@ class UserController {
         res.status(201).json(user)
     }
 
+    removeUser = async (req: Request, res: Response) => {
+        try {
+            let id = req.params.idUser;
+            let user = await this.userServices.remove(id);
+            res.status(200).json(user)
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
 }
 
 

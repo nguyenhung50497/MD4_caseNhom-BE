@@ -36,5 +36,14 @@ class SongService{
 
     }
 
+    checkUser = async (idUser, idSong) => {
+        let sql = `select u.idUser from song s join album a on s.idAlbum = a.idAlbum join user u on a.idUser = u.idUser where idSong = ${idSong}`;
+        let checkIdUser = await this.songRepository.query(sql);
+        if (checkIdUser[0].idUser === idUser) {
+            return true;
+        }
+        return false;
+    }
+
 }
 export default new SongService();

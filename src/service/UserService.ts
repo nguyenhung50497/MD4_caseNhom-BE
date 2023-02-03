@@ -11,6 +11,13 @@ class UserServices {
         this.userRepository = AppDataSource.getRepository(User)
     }
 
+    getAll = async () => {
+        let sql = `select * 
+                   from  user`
+        let users = await this.userRepository.query(sql)
+        return users;
+    }
+
     register = async (user) => {
         user.password = await bcrypt.hash(user.password, 10);
         return this.userRepository.save(user)
@@ -20,26 +27,29 @@ class UserServices {
     checkUser = async (user) => {
         let userCheck = await this.userRepository.findOneBy({username: user.username});
         if (!userCheck) {
-            return "không tìm thấy người dùng";
+            return "User not found";
         } else {
             let passwordCompare = bcrypt.compare(user.password, userCheck.password);
             if (!passwordCompare) {
-                return "Mật khẩu sai"
+                return "Wrong password"
             } else {
                 let payload = {
-                    idUser: userCheck.id,
+                    idUser: userCheck.idUser,
                     username: userCheck.username,
                     role: userCheck.role
                 }
+
+                const token = await  jwt.sign(payload, SECRET, {
+                    expiresIn: 360000
+                });
+
                 let userRes = {
-                    idUser: userCheck.id,
+                    idUser: userCheck.idUser,
                     username: userCheck.username,
                     role: userCheck.role,
-                    token : await  jwt.sign(payload, SECRET, {
-                        expiresIn: 360000
-                    })
+                    avatar: userCheck.avatar,
+                    token : token
                 }
-                console.log(userRes)
                 return userRes;
             }
         }
@@ -52,6 +62,14 @@ class UserServices {
             return null
         }
         return await this.userRepository.update({idUser : id},user)
+    }
+
+    remove = async (id) => {
+        let user = await this.userRepository.findOneBy({idUser: id});
+        if (!user) {
+            return null;
+        }
+        return this.userRepository.delete({idUser: id})
     }
 }
 

@@ -7,6 +7,7 @@ declare class SongService {
     updateSong: (idSong: any, newSong: any) => Promise<any>;
     moveSong: (idSong: any) => Promise<any>;
     findByNameSong: (value: any) => Promise<void>;
+    checkUser: (idUser: any, idSong: any) => Promise<boolean>;
 }
 declare const _default: SongService;
 export default _default;

@@ -12,4 +12,5 @@ class PlaylistService{
     save = async (playlist)=> {
         return this.playlistRepository.save(playlist)
     }
+    findBy
 }
