@@ -49,4 +49,4 @@ class AlbumController{
         }
     }
 }
-export default new AlbumController()
+export default new AlbumController();
