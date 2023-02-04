@@ -80,7 +80,8 @@ class SongController {
         };
         this.searchNameSong = async (req, res) => {
             try {
-                let songs = await this.songService.findByNameSong(req.query.name);
+                let songs = await this.songService.findByNameSong(req.query.nameSong);
+                console.log(songs);
                 res.status(200).json(songs);
             }
             catch (e) {

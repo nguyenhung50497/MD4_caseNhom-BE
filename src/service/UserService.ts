@@ -34,7 +34,7 @@ class UserServices {
         if (!userCheck) {
             return "User not found";
         } else {
-            let passwordCompare = bcrypt.compare(user.password, userCheck.password);
+            let passwordCompare = await bcrypt.compare(user.password, userCheck.password);
             if (!passwordCompare) {
                 return "Wrong password"
             } else {
