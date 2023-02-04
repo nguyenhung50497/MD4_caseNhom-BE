@@ -6,10 +6,14 @@ class PlaylistDetailService{
         this.playlistDetailRepository = AppDataSource.getRepository(PlaylistDetailService)
     }
     getAllPlaylistDetail = async () => {
-        let sql = `select a.idAlbum,a.nameAlbum,u.idUser,username from album a join user u on a.idUser = u.idUser`
-        let albums = await this.playlistDetailRepository.query(sql);
-        return albums
+        let sql = `select *
+                   from song
+                            join playlist_detail pd on song.idSong = pd.idSong
+                            join playlist p on pd.idPlaylist = p.idPlaylist;`
+        let playlistDetails = await this.playlistDetailRepository.query(sql);
+        return playlistDetails
     }
+    addS
 
 }
 export default new PlaylistDetailService();

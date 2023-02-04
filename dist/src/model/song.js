@@ -45,6 +45,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Song.prototype, "idCategory", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Song.prototype, "count", void 0);
 Song = __decorate([
     (0, typeorm_1.Entity)()
 ], Song);

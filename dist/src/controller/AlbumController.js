@@ -61,7 +61,7 @@ class AlbumController {
         };
         this.findByIdAlbum = async (req, res) => {
             try {
-                let idAlbum = req.params.idAlbum;
+                let idAlbum = req.params.id;
                 let albums = await AlbumService_1.default.findById(idAlbum);
                 res.status(200).json(albums);
             }
