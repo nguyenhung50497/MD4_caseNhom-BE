@@ -9,5 +9,6 @@ export class Album {
     nameAlbum: string;
     @Column()
     idUser: number
-
+    @Column()
+    imageAlbum: string;
 }

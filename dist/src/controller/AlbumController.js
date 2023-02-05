@@ -78,6 +78,16 @@ class AlbumController {
                 res.status(500).json(e.message);
             }
         };
+        this.showAlbumDetail = async (req, res) => {
+            try {
+                let albums = await AlbumService_1.default.albumDetail(req.params.idAlbum);
+                console.log(albums);
+                res.status(200).json(albums);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
         this.albumService = AlbumService_1.default;
     }
 }

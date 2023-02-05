@@ -25,6 +25,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Album.prototype, "idUser", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Album.prototype, "imageAlbum", void 0);
 Album = __decorate([
     (0, typeorm_1.Entity)()
 ], Album);

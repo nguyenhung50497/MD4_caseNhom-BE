@@ -74,5 +74,16 @@ class AlbumController{
             res.status(500).json(e.message)
         }
     }
+
+    showAlbumDetail = async (req: Request, res: Response) => {
+        try {
+            let albums = await albumService.albumDetail(req.params.idAlbum);
+            console.log(albums);
+            
+            res.status(200).json(albums);
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
 }
 export default new AlbumController()

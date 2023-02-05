@@ -9,4 +9,5 @@ albumRouter.post('/', userAuth,albumController.createAlbum);
 albumRouter.put('/:id', userAuth,albumController.editAlbum);
 albumRouter.delete('/:id',albumController.removeAlbum);
 // albumRouter.get('/:id',albumController.findByIdAlbum);
-albumRouter.get('/', userAuth,albumController.showMyAlbum);
+albumRouter.get('/my-album', userAuth,albumController.showMyAlbum);
+albumRouter.get('/detail/:idAlbum', userAuth,albumController.showAlbumDetail);

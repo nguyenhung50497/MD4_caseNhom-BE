@@ -42,9 +42,16 @@ class AlbumService {
             return false;
         };
         this.myAlbum = async (idUser) => {
-            let sql = `select * from album where idUser = ${idUser}`;
+            let sql = `select * from album a join user u on a.idUser = u.idUser where a.idUser = ${idUser}`;
             let albums = await this.albumRepository.query(sql);
-            console.log(albums);
+            if (!albums) {
+                return null;
+            }
+            return albums;
+        };
+        this.albumDetail = async (idAlbum) => {
+            let sql = `select * from album a join user u on a.idUser = u.idUser join song s on a.idAlbum = s.idAlbum where a.idAlbum = ${idAlbum}`;
+            let albums = await this.albumRepository.query(sql);
             if (!albums) {
                 return null;
             }

@@ -19,6 +19,6 @@ export class Song {
     sound: string;
     @Column()
     idCategory: number;
-    @Column()
+    @Column({default: 0})
     count: number;
 }

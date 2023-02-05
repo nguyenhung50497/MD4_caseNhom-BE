@@ -9,6 +9,7 @@ declare class AlbumController {
     removeAlbum: (req: Request, res: Response) => Promise<void>;
     findByIdAlbum: (req: Request, res: Response) => Promise<void>;
     showMyAlbum: (req: Request, res: Response) => Promise<void>;
+    showAlbumDetail: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: AlbumController;
 export default _default;
