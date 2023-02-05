@@ -4,6 +4,7 @@ declare class SongController {
     private categoryService;
     constructor();
     getAllSong: (req: Request, res: Response) => Promise<void>;
+    getMySong: (req: Request, res: Response) => Promise<void>;
     createSong: (req: Request, res: Response) => Promise<void>;
     editSong: (req: Request, res: Response) => Promise<void>;
     removeSong: (req: Request, res: Response) => Promise<void>;

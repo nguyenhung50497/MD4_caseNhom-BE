@@ -3,10 +3,6 @@ import playlistController from "../controller/PlaylistController";
 import {auth} from "../middleware/auth";
 import {userAuth} from "../middleware/user";
 
-
-
-
-
 export const playlistRouter = Router();
 playlistRouter.use(auth);
 playlistRouter.get('',playlistController.getAll);

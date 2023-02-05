@@ -4,12 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AlbumService_1 = __importDefault(require("../service/AlbumService"));
+const SongService_1 = __importDefault(require("../service/SongService"));
+const CategoryService_1 = __importDefault(require("../service/CategoryService"));
 class AlbumController {
     constructor() {
         this.getAll = async (req, res) => {
             try {
                 let albums = await AlbumService_1.default.getAllAlbum();
-                res.status(200).json(albums);
+                let songs = await SongService_1.default.top4Song();
+                let data = [albums, songs];
+                res.status(200).json(data);
             }
             catch (e) {
                 res.status(500).json(e.message);
@@ -81,14 +85,17 @@ class AlbumController {
         this.showAlbumDetail = async (req, res) => {
             try {
                 let albums = await AlbumService_1.default.albumDetail(req.params.idAlbum);
-                console.log(albums);
-                res.status(200).json(albums);
+                let categories = await CategoryService_1.default.getAllCategory();
+                let data = [albums, categories];
+                res.status(200).json(data);
             }
             catch (e) {
                 res.status(500).json(e.message);
             }
         };
         this.albumService = AlbumService_1.default;
+        this.songService = SongService_1.default;
+        this.categoryService = CategoryService_1.default;
     }
 }
 exports.default = new AlbumController();

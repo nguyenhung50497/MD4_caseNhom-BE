@@ -9,8 +9,8 @@ class PlaylistService{
         this.playlistRepository = AppDataSource.getRepository(Playlist)
     }
     getAllPlaylist = async ()=> {
-        let sql = `select p.idPlaylist,p.namePlaylist,u.idUser,username from playlist p join user u on p.idUser = u.idUser`;
-        let playlists = await this.playlistRepository.query(sql)
+        let sql = `select * from playlist p join user u on p.idUser = u.idUser`;
+        let playlists = await this.playlistRepository.query(sql);
         return playlists;
 
     }

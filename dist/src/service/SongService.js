@@ -6,10 +6,12 @@ const album_1 = require("../model/album");
 class SongService {
     constructor() {
         this.getAll = async () => {
-            let sql = `select *
-                   from album
-                            join song s on album.idAlbum = s.idAlbum
-                            join category c on s.idCategory = c.idCategory`;
+            let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser`;
+            let songs = await this.songRepository.query(sql);
+            return songs;
+        };
+        this.getMySong = async (idUser) => {
+            let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser where u.idUser = ${idUser}`;
             let songs = await this.songRepository.query(sql);
             return songs;
         };
@@ -20,7 +22,8 @@ class SongService {
             }
             albums.countSong = albums.countSong + 1;
             await this.albumRepository.update({ idAlbum: song.idAlbum }, albums);
-            return this.songRepository.save(song);
+            await this.songRepository.save(song);
+            return song.idAlbum;
         };
         this.findById = async (idSong) => {
             let songs = await this.songRepository.findOneBy({ idSong: idSong });
@@ -31,14 +34,16 @@ class SongService {
             if (!songs) {
                 return null;
             }
-            return await this.songRepository.update({ idSong: idSong }, newSong);
+            await this.songRepository.update({ idSong: idSong }, newSong);
+            return newSong.idAlbum;
         };
-        this.moveSong = async (idSong) => {
+        this.removeSong = async (idSong) => {
             let songs = await this.songRepository.findOneBy({ idSong: idSong });
             if (!songs) {
                 return null;
             }
-            return this.songRepository.delete({ idSong: idSong });
+            await this.songRepository.delete({ idSong: idSong });
+            return songs.idAlbum;
         };
         this.findByNameSong = async (value) => {
             let sql = `select *
@@ -78,6 +83,14 @@ class SongService {
             }
             songs.count++;
             return await this.songRepository.update({ idSong: idSong }, songs);
+        };
+        this.top4Song = async () => {
+            let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser order by count desc limit 4`;
+            let songs = await this.songRepository.query(sql);
+            if (!songs) {
+                return null;
+            }
+            return songs;
         };
         this.songRepository = data_source_1.AppDataSource.getRepository(song_1.Song);
         this.albumRepository = data_source_1.AppDataSource.getRepository(album_1.Album);

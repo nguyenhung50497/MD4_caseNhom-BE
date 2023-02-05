@@ -10,7 +10,20 @@ class SongController {
         this.getAllSong = async (req, res) => {
             try {
                 let songs = await SongService_1.default.getAll();
-                res.status(200).json(songs);
+                let categories = await CategoryService_1.default.getAllCategory();
+                let data = [songs, categories];
+                res.status(200).json(data);
+            }
+            catch (e) {
+                res.status(500).json(e.message);
+            }
+        };
+        this.getMySong = async (req, res) => {
+            try {
+                let songs = await SongService_1.default.getMySong(req["decoded"].idUser);
+                let categories = await CategoryService_1.default.getAllCategory();
+                let data = [songs, categories];
+                res.status(200).json(data);
             }
             catch (e) {
                 res.status(500).json(e.message);
@@ -48,7 +61,7 @@ class SongController {
                 let idUser = req["decoded"].idUser;
                 let check = await this.songService.checkUser(idUser, idSong);
                 if (check || (req["decoded"].role === 'admin')) {
-                    let songs = await this.songService.moveSong(idSong);
+                    let songs = await this.songService.removeSong(idSong);
                     res.status(200).json(songs);
                 }
                 else {

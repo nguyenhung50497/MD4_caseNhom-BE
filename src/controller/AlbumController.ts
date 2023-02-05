@@ -1,15 +1,24 @@
 import {Request, Response} from "express";
 import albumService from "../service/AlbumService";
+import songService from "../service/SongService";
+import categoryService from "../service/CategoryService";
+
 class AlbumController{
     private albumService;
     private userService;
+    private songService;
+    private categoryService;
     constructor() {
-        this.albumService = albumService
+        this.albumService = albumService;
+        this.songService = songService;
+        this.categoryService = categoryService;
     }
     getAll = async (req: Request, res: Response) => {
         try {
             let albums = await albumService.getAllAlbum();
-            res.status(200).json(albums)
+            let songs = await songService.top4Song();
+            let data = [albums, songs];
+            res.status(200).json(data)
         } catch (e) {
             res.status(500).json(e.message)
         }
@@ -78,9 +87,9 @@ class AlbumController{
     showAlbumDetail = async (req: Request, res: Response) => {
         try {
             let albums = await albumService.albumDetail(req.params.idAlbum);
-            console.log(albums);
-            
-            res.status(200).json(albums);
+            let categories = await categoryService.getAllCategory();
+            let data = [albums, categories];
+            res.status(200).json(data);
         } catch (e) {
             res.status(500).json(e.message)
         }

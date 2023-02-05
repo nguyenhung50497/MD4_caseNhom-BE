@@ -9,5 +9,6 @@ export class Playlist {
     namePlaylist: string;
     @Column()
     idUser: number;
-
+    @Column()
+    imagePlaylist: string;
 }

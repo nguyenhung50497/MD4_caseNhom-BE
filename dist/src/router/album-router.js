@@ -10,10 +10,11 @@ const auth_1 = require("../middleware/auth");
 const user_1 = require("../middleware/user");
 exports.albumRouter = (0, express_1.Router)();
 exports.albumRouter.get('', AlbumController_1.default.getAll);
+exports.albumRouter.get('/detail/:idAlbum', AlbumController_1.default.showAlbumDetail);
 exports.albumRouter.use(auth_1.auth);
 exports.albumRouter.post('/', user_1.userAuth, AlbumController_1.default.createAlbum);
 exports.albumRouter.put('/:id', user_1.userAuth, AlbumController_1.default.editAlbum);
 exports.albumRouter.delete('/:id', AlbumController_1.default.removeAlbum);
 exports.albumRouter.get('/my-album', user_1.userAuth, AlbumController_1.default.showMyAlbum);
-exports.albumRouter.get('/detail/:idAlbum', user_1.userAuth, AlbumController_1.default.showAlbumDetail);
+exports.albumRouter.get('/my-album-detail/:idAlbum', user_1.userAuth, AlbumController_1.default.showAlbumDetail);
 //# sourceMappingURL=album-router.js.map
