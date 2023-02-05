@@ -2,21 +2,25 @@
 import categoryService from "../service/CategoryService";
 import {Request, Response} from "express";
 import songService from "../service/SongService";
+import playlistService from "../service/PlaylistService";
 
 class SongController {
     private songService;
     private categoryService;
+    private playlistService;
 
     constructor() {
         this.songService = songService;
         this.categoryService = categoryService;
+        this.playlistService = playlistService
     }
 
     getAllSong = async (req: Request, res: Response) => {
         try {
             let songs = await songService.getAll();
             let categories = await categoryService.getAllCategory();
-            let data = [songs, categories];
+            let playlists = await playlistService.getAllPlaylist();
+            let data = [songs, categories, playlists];
             res.status(200).json(data);
         } catch (e) {
             res.status(500).json(e.message)
@@ -27,7 +31,8 @@ class SongController {
         try {
             let songs = await songService.getMySong(req["decoded"].idUser);
             let categories = await categoryService.getAllCategory();
-            let data = [songs, categories];
+            let playlists = await playlistService.getAllPlaylist();
+            let data = [songs, categories, playlists];
             res.status(200).json(data);
         } catch (e) {
             res.status(500).json(e.message)

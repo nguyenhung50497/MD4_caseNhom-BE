@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 declare class SongController {
     private songService;
     private categoryService;
+    private playlistService;
     constructor();
     getAllSong: (req: Request, res: Response) => Promise<void>;
     getMySong: (req: Request, res: Response) => Promise<void>;

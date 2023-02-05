@@ -43,5 +43,14 @@ class PlaylistService{
         return false;
     }
 
+    countSongPlaylist = async (idPlaylist) => {
+        let playlist = await this.playlistRepository.findOneBy({idPlaylist: idPlaylist})
+        if (!playlist) {
+            return null
+        }
+        playlist.countSongPlaylist = playlist.countSongPlaylist + 1;
+        return await this.playlistRepository.update({idPlaylist: idPlaylist}, playlist);
+    }
+
 }
 export default new PlaylistService();

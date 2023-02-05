@@ -14,6 +14,18 @@ class PlaylistDetailService{
         let playlistDetails = await this.playlistDetailRepository.query(sql);
         return playlistDetails
     }
+
+    getPlaylistDetail = async (idPlaylist) => {
+        let sql = `select * from song
+                            join playlist_detail pd on song.idSong = pd.idSong
+                            join playlist p on pd.idPlaylist = p.idPlaylist 
+                            join category c on 	song.idCategory = c.idCategory 
+                            join album a on song.idAlbum = a.idAlbum
+                            join user u on p.idUser = u.idUser where p.idPlaylist = ${idPlaylist};`
+        let playlistDetails = await this.playlistDetailRepository.query(sql);
+        return playlistDetails
+    }
+    
     save = async (playlistDetail)=> {
         console.log(playlistDetail)
         return this.playlistDetailRepository.save(playlistDetail)

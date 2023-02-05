@@ -11,4 +11,6 @@ export class Playlist {
     idUser: number;
     @Column()
     imagePlaylist: string;
+    @Column()
+    countSongPlaylist: number;
 }

@@ -29,6 +29,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Playlist.prototype, "imagePlaylist", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Playlist.prototype, "countSongPlaylist", void 0);
 Playlist = __decorate([
     (0, typeorm_1.Entity)()
 ], Playlist);

@@ -5,13 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const CategoryService_1 = __importDefault(require("../service/CategoryService"));
 const SongService_1 = __importDefault(require("../service/SongService"));
+const PlaylistService_1 = __importDefault(require("../service/PlaylistService"));
 class SongController {
     constructor() {
         this.getAllSong = async (req, res) => {
             try {
                 let songs = await SongService_1.default.getAll();
                 let categories = await CategoryService_1.default.getAllCategory();
-                let data = [songs, categories];
+                let playlists = await PlaylistService_1.default.getAllPlaylist();
+                let data = [songs, categories, playlists];
                 res.status(200).json(data);
             }
             catch (e) {
@@ -22,7 +24,8 @@ class SongController {
             try {
                 let songs = await SongService_1.default.getMySong(req["decoded"].idUser);
                 let categories = await CategoryService_1.default.getAllCategory();
-                let data = [songs, categories];
+                let playlists = await PlaylistService_1.default.getAllPlaylist();
+                let data = [songs, categories, playlists];
                 res.status(200).json(data);
             }
             catch (e) {
@@ -122,6 +125,7 @@ class SongController {
         };
         this.songService = SongService_1.default;
         this.categoryService = CategoryService_1.default;
+        this.playlistService = PlaylistService_1.default;
     }
 }
 exports.default = new SongController();

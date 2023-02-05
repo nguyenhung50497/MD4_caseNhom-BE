@@ -3,4 +3,5 @@ export declare class Playlist {
     namePlaylist: string;
     idUser: number;
     imagePlaylist: string;
+    countSongPlaylist: number;
 }
