@@ -1,12 +1,14 @@
 import {Request, Response} from "express";
 import {AppDataSource} from "../data-source";
 import {Song} from "../model/song";
+import {Album} from "../model/album";
 
 class SongService {
     private songRepository
-
+    private albumRepository
     constructor() {
-        this.songRepository = AppDataSource.getRepository(Song)
+        this.songRepository = AppDataSource.getRepository(Song);
+        this.albumRepository = AppDataSource.getRepository(Album);
     }
 
     getAll = async () => {
@@ -18,7 +20,13 @@ class SongService {
         return songs;
     }
     save = async (song) => {
-        return this.songRepository.save(song)
+        let albums = await this.albumRepository.findOneBy({idAlbum: song.idAlbum})
+        if (!albums) {
+            return null
+        }
+        albums.countSong = albums.countSong + 1;
+        await this.albumRepository.update({idAlbum: song.idAlbum}, albums);
+        return this.songRepository.save(song);
     }
     findById = async (idSong) => {
         let songs = await this.songRepository.findOneBy({idSong: idSong})

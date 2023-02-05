@@ -1,5 +1,6 @@
 declare class SongService {
     private songRepository;
+    private albumRepository;
     constructor();
     getAll: () => Promise<any>;
     save: (song: any) => Promise<any>;

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_source_1 = require("../data-source");
 const song_1 = require("../model/song");
+const album_1 = require("../model/album");
 class SongService {
     constructor() {
         this.getAll = async () => {
@@ -13,6 +14,12 @@ class SongService {
             return songs;
         };
         this.save = async (song) => {
+            let albums = await this.albumRepository.findOneBy({ idAlbum: song.idAlbum });
+            if (!albums) {
+                return null;
+            }
+            albums.countSong = albums.countSong + 1;
+            await this.albumRepository.update({ idAlbum: song.idAlbum }, albums);
             return this.songRepository.save(song);
         };
         this.findById = async (idSong) => {
@@ -73,6 +80,7 @@ class SongService {
             return await this.songRepository.update({ idSong: idSong }, songs);
         };
         this.songRepository = data_source_1.AppDataSource.getRepository(song_1.Song);
+        this.albumRepository = data_source_1.AppDataSource.getRepository(album_1.Album);
     }
 }
 exports.default = new SongService();

@@ -3,4 +3,5 @@ export declare class Album {
     nameAlbum: string;
     idUser: number;
     imageAlbum: string;
+    countSong: number;
 }

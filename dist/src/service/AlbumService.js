@@ -5,8 +5,11 @@ const album_1 = require("../model/album");
 class AlbumService {
     constructor() {
         this.getAllAlbum = async () => {
-            let sql = `select a.idAlbum,a.nameAlbum,u.idUser,username from album a join user u on a.idUser = u.idUser`;
+            let sql = `select * from album a join user u on a.idUser = u.idUser`;
             let albums = await this.albumRepository.query(sql);
+            if (!albums) {
+                return null;
+            }
             return albums;
         };
         this.save = async (album) => {
@@ -50,7 +53,7 @@ class AlbumService {
             return albums;
         };
         this.albumDetail = async (idAlbum) => {
-            let sql = `select * from album a join user u on a.idUser = u.idUser join song s on a.idAlbum = s.idAlbum where a.idAlbum = ${idAlbum}`;
+            let sql = `select * from album a join user u on a.idUser = u.idUser join song s on a.idAlbum = s.idAlbum join category c on s.idcategory = c.idCategory where a.idAlbum = ${idAlbum}`;
             let albums = await this.albumRepository.query(sql);
             if (!albums) {
                 return null;

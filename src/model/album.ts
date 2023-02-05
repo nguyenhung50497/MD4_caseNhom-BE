@@ -8,7 +8,9 @@ export class Album {
     @Column()
     nameAlbum: string;
     @Column()
-    idUser: number
+    idUser: number;
     @Column()
     imageAlbum: string;
+    @Column({default: 0})
+    countSong: number;
 }
