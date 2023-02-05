@@ -7,4 +7,5 @@ export declare class Song {
     image: string;
     sound: string;
     idCategory: number;
+    count: number;
 }

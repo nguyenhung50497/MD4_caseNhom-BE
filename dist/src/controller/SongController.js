@@ -61,7 +61,7 @@ class SongController {
         };
         this.findByIdSong = async (req, res) => {
             try {
-                let idSong = req.params.id;
+                let idSong = req.params.idSong;
                 let songs = await SongService_1.default.findById(idSong);
                 res.status(200).json(songs);
             }
@@ -80,7 +80,8 @@ class SongController {
         };
         this.searchNameSong = async (req, res) => {
             try {
-                let songs = await this.songService.findByNameSong(req.query.name);
+                let songs = await this.songService.findByNameSong(req.query.nameSong);
+                console.log(songs);
                 res.status(200).json(songs);
             }
             catch (e) {
@@ -91,6 +92,16 @@ class SongController {
             try {
                 let songs = await this.songService.findSongByIdUser(req.params.idUser);
                 return res.status(200).json(songs);
+            }
+            catch (err) {
+                res.status(500).json(err.message);
+            }
+        };
+        this.countSong = async (req, res) => {
+            try {
+                let idSong = req.params.idSong;
+                let counts = await this.songService.checkCount(idSong);
+                res.status(200).json(counts);
             }
             catch (err) {
                 res.status(500).json(err.message);

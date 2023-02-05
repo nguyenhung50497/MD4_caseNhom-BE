@@ -39,6 +39,15 @@ class SongService {
         return this.songRepository.delete({idSong: idSong});
     }
     findByNameSong = async (value) => {
+            // console.log(value)
+            let sql = `select *
+                       from album
+                                join song s on album.idAlbum = s.idAlbum where s.nameSong like '%${value}%'`
+            let songs = await this.songRepository.query(sql);
+            if(!songs){
+                return null;
+            }
+            return songs;
 
     }
 

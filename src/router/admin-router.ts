@@ -1,7 +1,7 @@
 import {Router} from "express";
 
-import UserController from "../controller/Usercontroller";
-import userController from "../controller/Usercontroller";
+import UserController from "../controller/UserController";
+import userController from "../controller/UserController";
 import {adminAuth} from "../middleware/admin";
 import {auth} from "../middleware/auth";
 
