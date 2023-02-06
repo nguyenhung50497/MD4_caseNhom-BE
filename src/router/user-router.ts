@@ -10,4 +10,5 @@ userRouter.post('/register',UserController.register)
 userRouter.post('/login',UserController.login)
 userRouter.use(auth)
 
-userRouter.put('/:idUser', userAuth, UserController.editUser)
+userRouter.get('/:idUser', userAuth, UserController.showMyProfile);
+userRouter.put('/:idUser', userAuth, UserController.editUser);

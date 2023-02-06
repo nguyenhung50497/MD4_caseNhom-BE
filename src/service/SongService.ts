@@ -13,7 +13,10 @@ class SongService {
 
     getAll = async () => {
         let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser`;
-        let songs = await this.songRepository.query(sql)
+        let songs = await this.songRepository.query(sql);
+        if (!songs) {
+            return 'No songs found'
+        }
         return songs;
     }
 

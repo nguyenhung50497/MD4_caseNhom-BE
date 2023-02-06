@@ -6,12 +6,15 @@ class UserController {
 
     constructor() {
         this.userServices = UserServices;
-
-
     }
 
     getAllUser = async (req: Request, res: Response) => {
-        let response = await this.userServices.getAll()
+        let response = await this.userServices.getAll();
+        res.status(200).json(response)
+    }
+
+    showMyProfile = async (req: Request, res: Response) => {
+        let response = await this.userServices.getMyProfile(req.params.idUser);
         res.status(200).json(response)
     }
 

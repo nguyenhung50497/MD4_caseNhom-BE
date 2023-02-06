@@ -14,6 +14,12 @@ class PlaylistService{
         return playlists;
 
     }
+    getMyPlaylist = async (idUser)=> {
+        let sql = `select * from playlist p join user u on p.idUser = u.idUser where u.idUser = ${idUser}`;
+        let playlists = await this.playlistRepository.query(sql);
+        return playlists;
+
+    }
     save = async (playlist)=> {
 
         return this.playlistRepository.save(playlist)

@@ -3,7 +3,7 @@ import songController from "../controller/SongController";
 import {auth} from "../middleware/auth";
 import {userAuth} from "../middleware/user";
 export const songRouter = Router()
-songRouter.get('',songController.getAllSong)
+songRouter.get('',songController.getAllSong);
 songRouter.use(auth)
 songRouter.get('/my-songs',songController.getMySong)
 songRouter.post('', userAuth,songController.createSong)

@@ -7,6 +7,6 @@ import {auth} from "../middleware/auth";
 
 export const adminRouter = Router();
 adminRouter.use(auth);
-adminRouter.get('', userController.getAllUser)
+adminRouter.get('', adminAuth, userController.getAllUser)
 
 adminRouter.delete('/:idUser', adminAuth, UserController.removeUser)

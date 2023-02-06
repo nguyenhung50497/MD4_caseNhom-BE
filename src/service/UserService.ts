@@ -18,8 +18,15 @@ class UserServices {
 
     getAll = async () => {
         let sql = `select * 
-                   from  user`
-        let users = await this.userRepository.query(sql)
+                   from  user where role = 'user'`
+        let users = await this.userRepository.query(sql);
+        return users;
+    }
+
+    getMyProfile = async (idUser) => {
+        let sql = `select * 
+                   from  user where idUser = ${idUser}`
+        let users = await this.userRepository.query(sql);
         return users;
     }
 

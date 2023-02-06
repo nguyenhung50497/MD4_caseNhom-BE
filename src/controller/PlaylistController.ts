@@ -12,7 +12,7 @@ class PlaylistController{
     }
     getAll = async (req: Request, res: Response) => {
         try {
-            let playlists = await playlistService.getAllPlaylist();
+            let playlists = await playlistService.getMyPlaylist(req["decoded"].idUser);
             res.status(200).json(playlists)
         } catch (e) {
             res.status(500).json(e.message)
