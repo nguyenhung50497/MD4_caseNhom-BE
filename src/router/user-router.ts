@@ -10,5 +10,7 @@ userRouter.post('/register',UserController.register)
 userRouter.post('/login',UserController.login)
 userRouter.use(auth)
 
-userRouter.get('/:idUser', userAuth, UserController.showMyProfile);
+userRouter.get('/my-profile/:idUser', userAuth, UserController.showMyProfile);
+userRouter.post('/check-old-password/:idUser', userAuth, UserController.checkOldPassword);
+userRouter.post('/check-new-password/:idUser', userAuth, UserController.checkNewPassword);
 userRouter.put('/:idUser', userAuth, UserController.editUser);

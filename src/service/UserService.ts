@@ -27,7 +27,28 @@ class UserServices {
         let sql = `select * 
                    from  user where idUser = ${idUser}`
         let users = await this.userRepository.query(sql);
+
         return users;
+    }
+
+    checkOldPassword = async (idUser, password) => {
+        let userCheck = await this.userRepository.findOneBy({idUser: idUser});
+        let passwordCompare = await bcrypt.compare(password, userCheck.password);
+        if (passwordCompare) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    checkNewPassword = async (idUser, password) => {
+        let userCheck = await this.userRepository.findOneBy({idUser: idUser});
+        let passwordCompare = await bcrypt.compare(password, userCheck.password);
+        if (passwordCompare) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     register = async (user) => {
@@ -73,6 +94,7 @@ class UserServices {
         if(!checkUser) {
             return null
         }
+        user.password = checkUser.password;
         return await this.userRepository.update({idUser : id},user)
     }
 
