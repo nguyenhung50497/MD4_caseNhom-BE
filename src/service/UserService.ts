@@ -33,21 +33,39 @@ class UserServices {
 
     checkOldPassword = async (idUser, password) => {
         let userCheck = await this.userRepository.findOneBy({idUser: idUser});
-        let passwordCompare = await bcrypt.compare(password, userCheck.password);
-        if (passwordCompare) {
-            return true;
+        if (!userCheck) {
+            return "User not found";
         } else {
-            return false;
+            let passwordCompare = await bcrypt.compare(password, userCheck.password);
+            if (passwordCompare) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
     checkNewPassword = async (idUser, password) => {
         let userCheck = await this.userRepository.findOneBy({idUser: idUser});
-        let passwordCompare = await bcrypt.compare(password, userCheck.password);
-        if (passwordCompare) {
-            return true;
+        if (!userCheck) {
+            return "User not found";
         } else {
-            return false;
+            let passwordCompare = await bcrypt.compare(password, userCheck.password);
+            if (passwordCompare) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    changePassword = async (idUser, password) => {
+        let user = await this.userRepository.findOneBy({idUser: idUser});
+        if (!user) {
+            return "User not found";
+        } else {
+            user.password = await bcrypt.hash(password, 10);
+            return this.userRepository.update({idUser: idUser}, user);
         }
     }
 

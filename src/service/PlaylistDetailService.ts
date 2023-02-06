@@ -27,8 +27,12 @@ class PlaylistDetailService{
     }
     
     save = async (playlistDetail)=> {
-        console.log(playlistDetail)
-        return this.playlistDetailRepository.save(playlistDetail)
+        let playlistDetails = await this.playlistDetailRepository.findOneBy({idSong: playlistDetail.idSong});
+        if (!playlistDetails) {
+            await this.playlistDetailRepository.save(playlistDetail);
+            return true;
+        }
+        return false;
     }
     removeSongPlaylist = async (idPlaylistDetail) => {
         let playlistDetails = await this.playlistDetailRepository.findOneBy({idPlaylistDetail: idPlaylistDetail});

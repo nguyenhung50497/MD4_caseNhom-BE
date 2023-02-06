@@ -33,7 +33,9 @@ class PlaylistDetailController {
     createPlaylistDetails = async (req: Request, res: Response) => {
         try {
             let playlistDetails = await playlistDetailService.save(req.body);
-            let countSongPlaylist = await playlistService.countSongPlaylist(req.body.idPlaylist);
+            if (playlistDetails) {
+                let countSongPlaylist = await playlistService.countSongPlaylist(req.body.idPlaylist);
+            }
             res.status(200).json(playlistDetails)
         } catch (e) {
             res.status(500).json(e.message)

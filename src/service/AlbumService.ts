@@ -26,7 +26,7 @@ class AlbumService {
         }
         return albums
     }
-    updateAlbum = async (idAlbum,newAlbum) => {
+    updateAlbum = async (idAlbum, newAlbum) => {
         let albums = await this.albumRepository.findOneBy({idAlbum: idAlbum})
         if (!albums) {
             return null

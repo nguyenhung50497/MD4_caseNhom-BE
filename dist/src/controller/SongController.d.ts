@@ -14,6 +14,8 @@ declare class SongController {
     searchNameSong: (req: Request, res: Response) => Promise<void>;
     findSongByIdUser: (req: Request, res: Response) => Promise<Response<any, Record<string, any>>>;
     countSong: (req: Request, res: Response) => Promise<void>;
+    findSongByName: (req: Request, res: Response) => Promise<void>;
+    findSong: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: SongController;
 export default _default;

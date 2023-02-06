@@ -37,6 +37,7 @@ class SongService {
             if (!songs) {
                 return null;
             }
+            newSong.count = songs.count;
             await this.songRepository.update({ idSong: idSong }, newSong);
             return newSong.idAlbum;
         };
@@ -89,6 +90,14 @@ class SongService {
         };
         this.top4Song = async () => {
             let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser order by count desc limit 4`;
+            let songs = await this.songRepository.query(sql);
+            if (!songs) {
+                return null;
+            }
+            return songs;
+        };
+        this.findSongByName = async (name) => {
+            let sql = `select * from album join song s on album.idAlbum = s.idAlbum join category c on s.idCategory = c.idCategory join user u on album.idUser = u.idUser where nameSong like "%${name}%"`;
             let songs = await this.songRepository.query(sql);
             if (!songs) {
                 return null;

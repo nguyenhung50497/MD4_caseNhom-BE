@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Album.prototype, "idUser", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], Album.prototype, "imageAlbum", void 0);
 __decorate([

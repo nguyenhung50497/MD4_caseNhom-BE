@@ -28,7 +28,7 @@ class PlaylistService{
         let playlists = await this.playlistRepository.findOneBy({idPlaylist :idPlaylist})
         return playlists
     }
-    updatePlaylist= async (idPlaylist,newPlaylist)=>{
+    updatePlaylist= async (idPlaylist, newPlaylist)=>{
         let playlists = await this.playlistRepository.findOneBy({idPlaylist: idPlaylist})
         if (!playlists) {
             return null

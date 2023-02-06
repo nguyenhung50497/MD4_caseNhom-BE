@@ -13,6 +13,7 @@ declare class SongService {
     checkUser: (idUser: any, idSong: any) => Promise<boolean>;
     checkCount: (idSong: any) => Promise<any>;
     top4Song: () => Promise<any>;
+    findSongByName: (name: any) => Promise<any>;
 }
 declare const _default: SongService;
 export default _default;

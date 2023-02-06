@@ -1,3 +1,4 @@
+import { text } from "express";
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 
@@ -13,9 +14,9 @@ export class Song {
     author: string;
     @Column()
     idAlbum: number;
-    @Column()
+    @Column({type: "text"})
     image: string;
-    @Column()
+    @Column({type: "text"})
     sound: string;
     @Column()
     idCategory: number;

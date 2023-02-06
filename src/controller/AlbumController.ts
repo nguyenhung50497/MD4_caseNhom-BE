@@ -35,7 +35,7 @@ class AlbumController{
     editAlbum = async (req: Request, res: Response)=> {
       try {
           let idAlbum = req.params.id;
-          let newAlbum = req.body
+          let newAlbum = req.body;
           let idUser = req["decoded"].idUser;
           let check = await this.albumService.checkUser(idUser, idAlbum);
           if(check) {

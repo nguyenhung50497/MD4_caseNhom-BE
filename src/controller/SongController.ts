@@ -134,6 +134,39 @@ class SongController {
             res.status(500).json(err.message)
         }
     }
+
+    findSongByName = async (req: Request,res: Response) => {
+        try {
+            let playlists;
+            let data;
+            let name = req.query.name
+            let songs = await this.songService.findSongByName(name)
+            let categories = await categoryService.getAllCategory();
+            if (req["decoded"]) {
+                console.log(1);
+                playlists = await playlistService.getMyPlaylist(req["decoded"].idUser);
+                data = [songs, categories, playlists];
+            } else {
+                console.log(2);
+                data = [songs, categories];
+            }
+            res.status(200).json(data)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
+
+    findSong = async (req: Request,res: Response) => {
+        try {
+            let name = req.query.name
+            let songs = await this.songService.findSongByName(name)
+            let categories = await categoryService.getAllCategory();
+            let data = [songs, categories];
+            res.status(200).json(data)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
 }
 
 export default new SongController();

@@ -39,7 +39,7 @@ class PlaylistController{
     editPlaylist = async (req: Request, res: Response)=> {
         try {
             let idPlaylist = req.params.idPlaylist;
-            let newPlaylist = req.body
+            let newPlaylist = req.body;
             let idUser = req["decoded"].idUser;
             let check = await this.playlistService.checkUser(idUser, idPlaylist);
             if(check) {

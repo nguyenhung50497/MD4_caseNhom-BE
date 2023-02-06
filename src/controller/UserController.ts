@@ -44,6 +44,15 @@ class UserController {
         }
     }
 
+    changePassword = async (req: Request, res: Response) => {
+        try {
+            let response = await this.userServices.changePassword(req.params.idUser, req.body.password);
+            res.status(200).json(response);
+        } catch (e) {
+            res.status(500).json(e.message)
+        }
+    }
+
     register = async (req: Request, res: Response) => {
         try {
             let user = await this.userServices.register(req.body);
