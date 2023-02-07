@@ -30,7 +30,7 @@ __decorate([
     __metadata("design:type", String)
 ], Playlist.prototype, "imagePlaylist", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
 ], Playlist.prototype, "countSongPlaylist", void 0);
 Playlist = __decorate([
