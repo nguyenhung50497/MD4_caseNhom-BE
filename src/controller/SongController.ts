@@ -109,7 +109,6 @@ class SongController {
     searchNameSong = async (req: Request,res: Response) => {
         try{
             let songs = await this.songService.findByNameSong(req.query.nameSong)
-            console.log(songs)
             res.status(200).json(songs)
         }catch (e){
             res.status(500).json(e.message)
@@ -143,11 +142,9 @@ class SongController {
             let songs = await this.songService.findSongByName(name)
             let categories = await categoryService.getAllCategory();
             if (req["decoded"]) {
-                console.log(1);
                 playlists = await playlistService.getMyPlaylist(req["decoded"].idUser);
                 data = [songs, categories, playlists];
             } else {
-                console.log(2);
                 data = [songs, categories];
             }
             res.status(200).json(data)
