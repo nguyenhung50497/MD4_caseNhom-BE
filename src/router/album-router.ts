@@ -11,4 +11,4 @@ albumRouter.put('/:id', userAuth,albumController.editAlbum);
 albumRouter.delete('/:id',albumController.removeAlbum);
 // albumRouter.get('/:id',albumController.findByIdAlbum);
 albumRouter.get('/my-album', userAuth,albumController.showMyAlbum);
-albumRouter.get('/my-album-detail/:idAlbum', userAuth,albumController.showAlbumDetail);
+albumRouter.get('/album-detail/:idAlbum', albumController.showAlbumDetail);
